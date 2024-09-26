@@ -6,8 +6,8 @@ const mongoose = require("mongoose");
 const {z} = require("zod");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
-const {userModel} = require("./models/users")
-const {statusModel} = require("./models/applications")
+const {userModel} = require("../models/users")
+const {statusModel} = require("../models/applications")
 
 app.use(express.json());
 app.use(cors());
