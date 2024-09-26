@@ -1,20 +1,17 @@
 {
-  "name": "backend",
+  "name": "my-express-app",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
-    "start": "node index.js"
+    "dev": "vercel dev", 
+    "start": "node api/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.0",
-    "mongoose": "^8.6.3",
-    "zod": "^3.23.8"
+    "express": "^4.x.x",
+    "mongoose": "^6.x.x",
+    "dotenv": "^10.x.x"
+  },
+  "devDependencies": {
+    "vercel": "^23.x.x"
   }
 }
