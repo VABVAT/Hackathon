@@ -6,8 +6,8 @@ const mongoose = require("mongoose");
 const {z} = require("zod");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
-const {userModel} = require("../models/users")
-const {statusModel} = require("../models/applications")
+const {userModel} = require("./models/users")
+const {statusModel} = require("./models/applications")
 
 app.use(express.json());
 app.use(cors());
@@ -48,12 +48,12 @@ async  function auth_2(req, res, next){
     }
 }
 
-app.get("/api", (req, res)=> {
+app.get("/", (req, res)=> {
     res.send("welcome")
 })
 
 //! end point for new applications 
-app.post("/api/PCCInformation", auth_1 ,async (req, res) =>{
+app.post("/PCCInformation", auth_1 ,async (req, res) =>{
     // console.log(req.body.name);
 
     const required_body = z.object({
@@ -111,7 +111,7 @@ app.post("/api/PCCInformation", auth_1 ,async (req, res) =>{
 })
 
 //! end point for viewing status of application
-app.post("/api/PCCStatus", auth_2, async (req, res) => {
+app.post("/PCCStatus", auth_2, async (req, res) => {
     res.status(200).json({status: req.body.state});
 })
 
