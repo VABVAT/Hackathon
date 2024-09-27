@@ -10,6 +10,7 @@ const {userModel} = require("./models/users")
 const {statusModel} = require("./models/applications")
 const {PCCInformation} = require("./routes/PCCInformation");
 const {PCCStatus} = require("./routes/PCCStatus")
+const {language} = require("./routes/language")
 app.use(express.json());
 app.use(cors());
 // console.log("hey")
@@ -31,8 +32,11 @@ app.get("/", (req, res)=> {
 app.use("/PCCInformation", PCCInformation);
 
 //! end point for viewing status of application
-
 app.use("/PCCStatus",  PCCStatus);
+
+// ! language end point
+app.use("/language", language)
+
 
 //! end point for admin dashboard
 
