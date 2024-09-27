@@ -1,0 +1,40 @@
+/* Main Block */
+.speech {
+    margin: 9% auto; /* Center horizontally */
+    width: 60vw;
+    height: 40vh; /* 40% of the viewport height */
+    border: 1px solid #000;
+    overflow-y: auto; /* Enable vertical scrolling if the content overflows */
+    background-color: #f9f9f9; /* Light background for the transcript */
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px; /* Space between the transcript area and buttons */
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+}
+
+/* Element for Transcript */
+.speech__transcript {
+    height: 100%; /* Full height of the parent */
+    width: 100%; /* Full width of the parent */
+    font-size: 16px; /* Font size for transcript */
+    color: #333; /* Dark text for better readability */
+    text-align: center; /* Center text within the transcript box */
+}
+
+/* Button Styles */
+.speech__button {
+    margin: 10px 5px; /* Space around buttons */
+    padding: 10px 15px; /* Padding for buttons */
+    font-size: 16px; /* Font size for buttons */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.speech__button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
