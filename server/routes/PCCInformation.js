@@ -8,52 +8,15 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const {userModel} = require("../models/users")
 const {statusModel} = require("../models/applications")
-
+const router = express.Router();
+const {auth_1} = require("../middlewares/auth1");
 app.use(express.json());
 app.use(cors());
 // console.log("hey")
 
 mongoose.connect(process.env.MONGO_CONNECTION)
 
-// app.get("/", (req, res)=>{
-//     res.send("hello world")
-// })
-
-//! auth 1 mekes sure its their first time 
-
-async function auth_1(req, res, next){
-    if(req.body.adhaarNumber){
-        const user = await  userModel.findOne({adhaarNumber: req.body.adhaarNumber})
-        if(user){
-            res.status(402).json({error: "kindly view your status"})
-        }else{
-            next();
-        }
-        
-    }else{
-        next();
-    }
-}
-
-async  function auth_2(req, res, next){
-    // console.log(req.body.token)
-    const status_report = await statusModel.findOne({
-        user_id:req.body.token
-    })
-    if(status_report){
-        req.body.state = status_report.status;
-        next();
-    }else{
-        res.status(402).json({error: "Create new application"})
-    }
-}
-
-app.get("/", (req, res)=> {
-    res.send("welcome")
-})
-
-//! end point for new applications 
-app.post("/PCCInformation", auth_1 ,async (req, res) =>{
+router.post("/", auth_1 ,async (req, res) =>{
     // console.log(req.body.name);
 
     const required_body = z.object({
@@ -110,13 +73,8 @@ app.post("/PCCInformation", auth_1 ,async (req, res) =>{
 }
 })
 
-//! end point for viewing status of application
-app.post("/PCCStatus", auth_2, async (req, res) => {
-    res.status(200).json({status: req.body.state});
-})
-
-
-//! end point for admin dashboard
-
-
-app.listen(3000)
+module.exports = (
+    {
+        PCCInformation : router
+    }
+)
