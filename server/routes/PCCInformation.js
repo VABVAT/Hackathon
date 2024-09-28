@@ -20,7 +20,7 @@ router.post("/", auth_1 ,async (req, res) =>{
     // console.log(req.body.name);
 
     const required_body = z.object({
-        PoliceStation : z.string(),
+        // PoliceStation : z.string(),
         name : z.string().min(2, {message : "enter correct name"}),
         address : z.string().min(1, {message:"address required"}),
         dateOfAddress : z.string().min(4, {message: "date of address field required"}),
@@ -31,7 +31,7 @@ router.post("/", auth_1 ,async (req, res) =>{
         adhaarNumber : z.string().min(12).max(12, {message : "enter in format (XXXXXXXXXXXX)"})
     })
     //! i can add some checks for duplicity here
-    const PoliceStation = req.body.PoliceStation;
+    // const PoliceStation = req.body.PoliceStation;
     const name = req.body.name;
     const address = req.body.address;
     const dateOfAddress = req.body.dateOfAddress;
@@ -49,7 +49,7 @@ router.post("/", auth_1 ,async (req, res) =>{
     }else{
     try{
         await userModel.create({
-            PoliceStation:PoliceStation,
+            // PoliceStation:PoliceStation,
             name:name,
             address:address,
             date_since:dateOfAddress,

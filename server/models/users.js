@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const ObjectId = mongoose.ObjectId;
 
 const users = new Schema({
-    PoliceStation:String,
+    // PoliceStation:String,
     name: String,
     address : String,
     date_since : String,
