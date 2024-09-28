@@ -3,16 +3,19 @@ const Schema = mongoose.Schema;
 const ObjectId = mongoose.ObjectId;
 
 const users = new Schema({
-    full_name: String,
-    password : String,
-    age: Number,
-    sex: String,
-    DOB: String,
-    adhaarNumber: String,
-    address: String,
-    city: String,
-    state:  String,
-    imageUrl: String
+    PoliceStation:String,
+    name: String,
+    address : String,
+    date_since : String,
+    on_rent : String,
+    landlord : {
+        name_landlord : String,
+        phone : String
+    },
+    number_of_residents : String,
+    occupation : String,
+    mobileNo : String,
+    adhaarNumber: String
 })
 
 const userModel =  mongoose.model("users", users);

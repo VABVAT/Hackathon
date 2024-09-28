@@ -1,0 +1,33 @@
+// require("dotenv").config()
+// const express = require("express");
+// const app = express();
+// const mongoose = require("mongoose");
+// const {z} = require("zod");
+// const cors = require("cors");
+// const bcrypt = require("bcrypt");
+// const {userModel} = require("../models/users")
+// const {statusModel} = require("../models/applications")
+// const router = express.Router();
+// const {auth_1} = require("../middlewares/auth1");
+// app.use(express.json());
+// app.use(cors());
+// // console.log("hey")
+
+// mongoose.connect(process.env.MONGO_CONNECTION)
+
+// ! add admin table and verification middleware here
+// // router.post("/", async (req, res) => {
+// //     const adhaarNumber = req.body.adhaar;
+// //     const user = await userModel.findOne({
+// //         adhaarNumber : adhaarNumber
+// //     }) 
+// //     if(!user){
+// //         res.status(400).json({error : "User does not exists"})
+// //     }else{
+
+// //     }
+// // })
+
+// module.exports = ({
+//     adminPath : router
+// })

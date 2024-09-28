@@ -20,46 +20,47 @@ router.post("/", auth_1 ,async (req, res) =>{
     // console.log(req.body.name);
 
     const required_body = z.object({
-        name :  z.string().min(1),
-        password: z.string().min(6, {message : "password needs to be longer than 6 words"}).max(100, {message: "reduce password size"}),
-        age : z.number().min(0),
-        gender : z.string().min(1),
-        DOB : z.string().min(10).max(10),
-        adhaarNumber : z.string().min(12).max(12),
-        address : z.string().min(1),
-        city : z.string().min(1),
-        state :  z.string().min(1)
+        PoliceStation : z.string(),
+        name : z.string().min(2, {message : "enter correct name"}),
+        address : z.string().min(1, {message:"address required"}),
+        dateOfAddress : z.string().min(4, {message: "date of address field required"}),
+        on_rent : z.string().min(2, {message: "on rent field required"}),
+        number_of_residents : z.number().min(1, {message: "number of residents required"}),
+        occupation : z.string().min(2, {message : "occupation required"}),
+        mobileNo : z.string().min(9, {message: "phone number required"}),
+        adhaarNumber : z.string().min(12).max(12, {message : "enter in format (XXXXXXXXXXXX)"})
     })
     //! i can add some checks for duplicity here
+    const PoliceStation = req.body.PoliceStation;
     const name = req.body.name;
-    const password = await bcrypt.hash(req.body.password, 2);
-    const age = parseInt(req.body.age);
-    const gender = req.body.gender;
-    const DOB = req.body.dob;
-    const adhaarNumber = req.body.adhaarNumber;
     const address = req.body.address;
-    const city = req.body.city;
-    const state = req.body.state
+    const dateOfAddress = req.body.dateOfAddress;
+    const on_rent = req.body.on_rent;
+    // !landlord terniry
+    const number_of_residents = req.body.number_of_residents;
+    const occupation = req.body.occupation;
+    const mobileNo = req.body.mobileNo;
+    const adhaarNumber = req.body.adhaarNumber
     //! image issue to be taken care of
     //! put in database
-    const data =  required_body.safeParse({name, password, age, gender, DOB, adhaarNumber,address, city, state});
+    const data =  required_body.safeParse({ PoliceStation ,name, address, dateOfAddress, on_rent, number_of_residents, occupation,mobileNo ,adhaarNumber});
     if(!data.success){
-        res.status(401).json(data.error.issues.message);
+        res.status(401).json({error : data.error.issues.map(obj => obj.message)});
     }else{
     try{
         await userModel.create({
-            name,
-            password,
-            age,
-            gender,
-            DOB,
-            adhaarNumber,
-            address,
-            city,
-            state
+            PoliceStation:PoliceStation,
+            name:name,
+            address:address,
+            date_since:dateOfAddress,
+            on_rent: on_rent,
+            number_of_residents: number_of_residents,
+            occupation: occupation,
+            mobileNo: mobileNo,
+            adhaarNumber: adhaarNumber
         })
         const User = await userModel.findOne({
-            adhaarNumber:adhaarNumber
+            adhaarNumber:adhaarNumber,
         })
         //! adding pending requests
         await statusModel.create({
