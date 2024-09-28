@@ -14,6 +14,7 @@ const {language} = require("./routes/language")
 
 app.use(express.json());
 app.use(cors());
+app.options('*', cors());  // Enable CORS pre-flight for all routes
 // console.log("hey")
 
 mongoose.connect(process.env.MONGO_CONNECTION)
