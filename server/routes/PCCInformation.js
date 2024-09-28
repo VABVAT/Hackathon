@@ -43,7 +43,7 @@ router.post("/", auth_1 ,async (req, res) =>{
     const adhaarNumber = req.body.adhaarNumber
     //! image issue to be taken care of
     //! put in database
-    const data =  required_body.safeParse({ PoliceStation ,name, address, dateOfAddress, on_rent, number_of_residents, occupation,mobileNo ,adhaarNumber});
+    const data =  required_body.safeParse({ name, address, dateOfAddress, on_rent, number_of_residents, occupation,mobileNo ,adhaarNumber});
     if(!data.success){
         res.status(401).json({error : data.error.issues.map(obj => obj.message)});
     }else{
