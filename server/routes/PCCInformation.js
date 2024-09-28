@@ -25,7 +25,7 @@ router.post("/", auth_1 ,async (req, res) =>{
         address : z.string().min(1, {message:"address required"}),
         dateOfAddress : z.string().min(4, {message: "date of address field required"}),
         on_rent : z.string().min(2, {message: "on rent field required"}),
-        number_of_residents : z.number().min(1, {message: "number of residents required"}),
+        number_of_residents : z.string().min(1, {message: "number of residents required"}),
         occupation : z.string().min(2, {message : "occupation required"}),
         mobileNo : z.string().min(9, {message: "phone number required"}),
         adhaarNumber : z.string().min(12).max(12, {message : "enter in format (XXXXXXXXXXXX)"})
