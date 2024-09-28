@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
         const translatedText = await translateText(text);
         res.json({ translatedText });
     } catch (error) {
-        res.status(401).json({ error: 'Error translating text' });
+        res.status(409).json({ error: 'Error translating text' });
     }
 });
 
