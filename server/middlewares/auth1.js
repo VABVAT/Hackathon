@@ -17,7 +17,7 @@ async function auth_1(req, res, next){
     if(req.body.adhaarNumber){
         const user = await  userModel.findOne({adhaarNumber: req.body.adhaarNumber})
         if(user){
-            res.status(401).json({error: "kindly view your status"})
+            res.status(401).json({error: "you have already applied please view your status"})
         }else{
             next();
         }
