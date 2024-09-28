@@ -9,8 +9,16 @@
 
 .errortag{
     text-align: center;
+    font-weight: bolder;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
 }
-
+.corrtag{
+    text-align: center;
+    font-weight: bolder;
+    color: green;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .logo-container {
     text-align: center;
     margin-bottom: 20px;

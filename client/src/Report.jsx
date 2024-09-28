@@ -5,7 +5,11 @@ import { useState } from 'react';
 function Report() {
   const { transcript, resetTranscript } = useSpeechRecognition();
   const [translatedtext, settranslatedtext] = useState(null); 
+  const [sol, setsol] = useState(null);
+  const [pol, setpol] = useState(null);
   const startListening = () => {
+    resetTranscript();
+    settranslatedtext(null);
     SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
   };
 
@@ -14,6 +18,7 @@ function Report() {
   };
 
   const reset = () => {
+    settranslatedtext(null);
     resetTranscript();  // Ensure resetTranscript is invoked as a function
   };
 
@@ -22,19 +27,40 @@ function Report() {
       const response = await fetch("https://hackathon-five-jet.vercel.app/language", {
         method: "POST",
         headers:{'Content-Type':'application/json'},
-        body:{
+        body:JSON.stringify({
           text: transcript
-        }
+        })
       })
+      // console.log(response);
       if(response.status === 200){
         const data = await response.json()
-        // res.status(200).json({text:data});
-        settranslatedtext(data)
+        console.log(data);
+        settranslatedtext(data.translatedText)
       }else{
-        // res.status(401).json({error: "not able to translate"})
+
       }
     }catch(e){
-        // res.status(405).json({error : "server is probably down"})
+    }
+  }
+
+  const getSOl = async() => {
+    try{
+        const response = await fetch("https://a425-103-210-49-131.ngrok-free.app", {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            case_description:translatedtext
+          })
+        });
+        // console.log(response)
+        if(response.ok){
+          const data = await response.json();
+          setsol(data.case_type);
+          setpol(data.procedure)
+          console.log(data.case_type);
+        }
+    }catch(e){
+
     }
   }
 
@@ -48,6 +74,7 @@ function Report() {
   }
 
   return (
+    <>
     <div className={styles.speech}>
       <div className={styles.speech__transcript}>
         {transcript || "Your text will appear here."}
@@ -56,12 +83,27 @@ function Report() {
         <button className={styles.speech__button} onClick={startListening}>Start Listening</button>
         <button className={styles.speech__button} onClick={stopListening}>Stop Listening</button>
         <button className={styles.speech__button} onClick={reset}>Reset</button>
-        <button className={styles.speech__button} onClick={externalML}>Get solution</button>
-      </div>
-      <div className='otpt'>
-        <p>{translatedtext ? translatedtext : "translated text will appear here on clicking get solution"}</p>
+        <button className={styles.speech__button} onClick={externalML}>translate you text</button>
+        <button  className={styles.speech__button} onClick={getSOl}>Get solution for problem</button>
+
       </div>
     </div>
+    <div className={styles.otpt}>
+        <p>{translatedtext ? translatedtext : ""}</p>
+      </div>
+    <div className={styles.solution}>
+      <div className={styles.first}>
+        CASE TYPE
+        <br></br>
+        <p>{sol ? sol : ""}</p>
+      </div>
+      <div className={styles.first}>
+        PROCEDURE TO BE FOLLOWED
+        <br></br>
+        <p>{pol ? pol : ""}</p>
+      </div>
+    </div>
+    </>
   );
 }
 

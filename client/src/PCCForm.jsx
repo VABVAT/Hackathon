@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 const PCCForm = () => {
   const [district, setDistrict] = useState('');
   const [err, seterr] = useState(null);
+  const [comp, setcomp] = useState(null);
   const [formData, setFormData] = useState({
     name: '', // Full Name
     address: '', // Address
@@ -42,7 +43,7 @@ const PCCForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     // Form submission logic here
     
      
@@ -69,6 +70,7 @@ const PCCForm = () => {
         }
         else{
           seterr(null)
+          setcomp("submitted successfully you can view your status using you adhaar card")
         }
         
       };
@@ -164,7 +166,8 @@ const PCCForm = () => {
 
         <button type="submit" className="submit-button">Submit</button>
       </form>
-      <div className='errortag'>{err ? err : "no errors"}</div>
+      <div className='errortag'>{err ? err : ""}</div>
+      <div className="corrtag">{comp ? comp : ""}</div>
     </div>
   );
 };
