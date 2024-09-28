@@ -11,6 +11,7 @@ const {statusModel} = require("./models/applications")
 const {PCCInformation} = require("./routes/PCCInformation");
 const {PCCStatus} = require("./routes/PCCStatus")
 const {language} = require("./routes/language")
+const {enHi} = require("./routes/enHi")
 
 app.use(express.json());
 app.use(cors());
@@ -34,9 +35,9 @@ app.use("/PCCInformation", PCCInformation);
 app.use("/PCCStatus",  PCCStatus);
 
 // ! language end point
-app.use("/language", language)
+app.use("/language", language);
 
-
+app.use('/enHi', enHi);
 //! end point for admin dashboard
 
 
