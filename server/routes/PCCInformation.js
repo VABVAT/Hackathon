@@ -69,7 +69,7 @@ router.post("/", auth_1 ,async (req, res) =>{
         })
         res.status(200).json({token: User._id});
     }catch(e){
-        res.status(402).json({error:"Form submission error"}); 
+        res.status(401).json({error:"Form submission error"}); 
     }
 }
 })
