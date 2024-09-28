@@ -23,7 +23,7 @@ function Report() {
         method: "POST",
         headers:{'Content-Type':'application/json'},
         body:{
-          text: {transcript}
+          text: transcript
         }
       })
       if(response.status === 200){
