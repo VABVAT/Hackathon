@@ -4,6 +4,7 @@ import Home from './Home'
 import PCCForm from './PCCForm'
 import PCCStatus from './PCCStatus'
 import Report from './Report'
+import Service from './Service'
 // import './PCCForm.css'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path="/PCCForm" element={<PCCForm />}></Route>
             <Route path="/PCCStatus" element={<PCCStatus/>}></Route>
             <Route path="/report" element={<Report />}></Route>
+            <Route path="/service" element={<Service />}></Route>
         </Routes>
       </Router>
     </>

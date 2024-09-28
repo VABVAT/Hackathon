@@ -1,12 +1,14 @@
+import React, { useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import styles from './speech.module.css'; // Importing CSS Module
-import { useState } from 'react';
-
+import goa_logo from '/goa_image.png'
 function Report() {
   const { transcript, resetTranscript } = useSpeechRecognition();
   const [translatedtext, settranslatedtext] = useState(null); 
   const [sol, setsol] = useState(null);
-  const [pol, setpol] = useState(null);
+  const [pol, setpol] = useState([]);
+  const [but, setBut] = useState("english"); // Default to English
+
   const startListening = () => {
     resetTranscript();
     settranslatedtext(null);
@@ -19,50 +21,66 @@ function Report() {
 
   const reset = () => {
     settranslatedtext(null);
-    resetTranscript();  // Ensure resetTranscript is invoked as a function
+    resetTranscript();
+    setpol([]);
+    setsol("");
   };
 
   const externalML = async () => {
-    try{
-      const response = await fetch("https://hackathon-five-jet.vercel.app/language", {
+    try {
+      const response = await fetch("https://hackathon-second.vercel.app/language", {
         method: "POST",
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           text: transcript
         })
-      })
-      // console.log(response);
-      if(response.status === 200){
-        const data = await response.json()
-        console.log(data);
-        settranslatedtext(data.translatedText)
-      }else{
-
+      });
+      if (response.status === 200) {
+        const data = await response.json();
+        settranslatedtext(data.translatedText);
       }
-    }catch(e){
+    } catch (e) {
+      console.error(e);
     }
-  }
+  };
 
-  const getSOl = async() => {
-    try{
-        const response = await fetch("https://a425-103-210-49-131.ngrok-free.app", {
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({
-            case_description:translatedtext
-          })
-        });
-        // console.log(response)
-        if(response.ok){
-          const data = await response.json();
-          setsol(data.case_type);
-          setpol(data.procedure)
-          console.log(data.case_type);
+  const getSOl = async () => {
+    try {
+      const response = await fetch("https://2dfc-2409-40c2-200b-af51-71-ba17-88-8582.ngrok-free.app/classify", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          case_description: translatedtext
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const procedure = data.procedure;
+
+        let translatedProcedure = procedure;
+        if (but === "hindi") {
+          const hindiResponse = await fetch("https://hackathon-second.vercel.app/enHi", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              text: procedure
+            })
+          });
+          if (hindiResponse.ok) {
+            const hindiData = await hindiResponse.json();
+            translatedProcedure = hindiData.translatedText;
+          }
         }
-    }catch(e){
 
+        const arr = translatedProcedure.split('\\n');
+        setsol(data.case_type);
+        setpol(arr);
+      }
+    } catch (e) {
+      console.error(e);
     }
-  }
+  };
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return (
@@ -75,34 +93,57 @@ function Report() {
 
   return (
     <>
-    <div className={styles.speech}>
-      <div className={styles.speech__transcript}>
-        {transcript || "Your text will appear here."}
-      </div>
-      <div id="container">
-        <button className={styles.speech__button} onClick={startListening}>Start Listening</button>
-        <button className={styles.speech__button} onClick={stopListening}>Stop Listening</button>
-        <button className={styles.speech__button} onClick={reset}>Reset</button>
-        <button className={styles.speech__button} onClick={externalML}>translate you text</button>
-        <button  className={styles.speech__button} onClick={getSOl}>Get solution for problem</button>
+      <header className={styles.header}>
+        <div className={styles.headerContent}>
+          <div className={styles.logo}>
+            <img src={goa_logo} alt="Goa Police Logo" />
+          </div>
+          <div className={styles.title}>
+            <h1>COPBOT</h1>
+            <h3>AI Tool to assist visitors at police station</h3>
+          </div>
+        </div>
+        <div className={styles.animatedBg}></div>
+      </header>
+
+      <div className={styles.speech}>
+        <div className={styles.speech__transcript}>
+          {transcript || "Your text will appear here."}
+        </div>
 
       </div>
+      <div className={styles.buttonsContainer}>
+          <button className={styles.speech__button} onClick={startListening}>Start Listening</button>
+          <button className={styles.speech__button} onClick={stopListening}>Stop Listening</button>
+          <button className={styles.speech__button} onClick={reset}>Reset</button>
+          <button className={styles.speech__button} onClick={externalML}>Translate your text</button>
+          <button className={styles.speech__button} onClick={getSOl}>Get solution for problem</button>
+        </div>
+      <div className={styles.otpt}>
+        <p>{translatedtext ? "YOUR TEXT HAS BEEN TRANSLATED YOU CAN GET THE SOLUTION" : ""}</p>
+      </div>
+    <div className={styles.vvi}>
+      <select className={styles.dropbox} value={but} onChange={(e) => setBut(e.target.value)}>
+        <option value="english">English</option>
+        <option value="hindi">Hindi</option>
+      </select>
     </div>
-    <div className={styles.otpt}>
-        <p>{translatedtext ? translatedtext : ""}</p>
+      <div className={styles.solution}>
+        <div className={styles.first}>
+          Case type -<br />
+          <p>{sol ? sol : ""}</p>
+        </div>
+        <div className={styles.first}>
+          Procedure - <br />
+          <ul>
+            {pol.map((line, index) => (<li key={index}>{line}</li>))}
+          </ul>
+        </div>
       </div>
-    <div className={styles.solution}>
-      <div className={styles.first}>
-        CASE TYPE
-        <br></br>
-        <p>{sol ? sol : ""}</p>
-      </div>
-      <div className={styles.first}>
-        PROCEDURE TO BE FOLLOWED
-        <br></br>
-        <p>{pol ? pol : ""}</p>
-      </div>
-    </div>
+
+      <footer className={styles.footer}>
+        <p>Powered by COPBOT &copy; 2023</p>
+      </footer>
     </>
   );
 }

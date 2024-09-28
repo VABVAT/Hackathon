@@ -25,6 +25,9 @@ function App() {
   const report = () => {
     navigate('/report');
   };
+  const service = () => {
+    navigate('/service')
+  }
 
   useEffect(() => {
     const startSlider = (sliderId) => {
@@ -37,7 +40,7 @@ function App() {
         if (currentIndex >= images.length) {
           currentIndex = 0; // Reset to first image
         }
-        const offset = -currentIndex * 500; // Adjust based on image height
+        const offset = -currentIndex * 400; // Adjust based on image height
         slider.style.transform = `translateY(${offset}px)`; // Move the slider
       };
 
@@ -61,9 +64,9 @@ function App() {
             <h1>GOA POLICE</h1>
           </div>
           <div className="menu">
-            <button id="homeButton">Home</button>
+            <button id="homeButton" >Home</button>
             <button id="aboutButton">About Us</button>
-            <button id="featuresButton">Features</button>
+            <button id="featuresButton" onClick={service}>Services</button>
             <button id="contactUs">Contact Us</button>
           </div>
         </div>
@@ -86,6 +89,7 @@ function App() {
             <button className='b1' onClick={goToStatus}>Review your status</button>
             <button className='b1' onClick={adminLogin}>Admin login</button>
             <button className='b1' onClick={report}>Report a crime (with AI chat bot)</button>
+            <button className='b1' onClick={report}>FAQ with our Ai</button>
           </div>
         </div>
 

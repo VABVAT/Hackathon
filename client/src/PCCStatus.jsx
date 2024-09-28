@@ -1,13 +1,44 @@
+import { useState } from "react";
+import "./PCCStatus.css";  // Import the CSS file
 
-function PCCStatus(){
-    return <>
-        <input placeholder="Enter Your Token" type="text"></input>
-        <input placeholder="Enter Your Adhaar number" type="text"></input>
-        <div>
-            Your status will appear here
-            {/* !fetch to be done now */}
+function PCCStatus() {
+    const [token, setToken] = useState("");
+    const [err, setErr] = useState("");
+    const [userStatus, setUserStatus] = useState("");
+
+    const getStatus = async () => {
+        console.log(token);
+        const response = await fetch("https://hackathon-second.vercel.app/PCCStatus", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: token })
+        });
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+        if (response.status === 402) {
+            setErr("Create new application");
+        } else {
+            setUserStatus(data.status);
+        }
+    }
+
+    return (
+        <div className="pcc-container">
+            <h2 className="pcc-header">Check Your PCC Status</h2>
+            <input 
+                className="pcc-input" 
+                placeholder="Enter Your Token" 
+                type="text" 
+                value={token} 
+                onChange={(e) => setToken(e.target.value)} 
+            />
+            <button className="pcc-button" onClick={getStatus}>Check Status</button>
+            <div className="pcc-status">
+                {err ? <span className="pcc-error">{err}</span> : userStatus}
+            </div>
         </div>
-    </>
+    );
 }
 
-export default PCCStatus
+export default PCCStatus;

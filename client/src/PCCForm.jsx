@@ -7,6 +7,7 @@ const PCCForm = () => {
   const [district, setDistrict] = useState('');
   const [err, seterr] = useState(null);
   const [comp, setcomp] = useState(null);
+  const [token, setToken] = useState(null);
   const [formData, setFormData] = useState({
     name: '', // Full Name
     address: '', // Address
@@ -47,7 +48,7 @@ const PCCForm = () => {
     // Form submission logic here
     
      
-        const response = await fetch("https://hackathon-five-jet.vercel.app/PCCInformation", {
+        const response = await fetch("https://hackathon-second.vercel.app/PCCInformation", {
           method:'POST',
           headers:{
             'Content-Type':'application/json'
@@ -70,7 +71,8 @@ const PCCForm = () => {
         }
         else{
           seterr(null)
-          setcomp("submitted successfully you can view your status using you adhaar card")
+          setToken(result.token);
+          setcomp("submitted successfully you can view your status using you below token")
         }
         
       };
@@ -168,6 +170,7 @@ const PCCForm = () => {
       </form>
       <div className='errortag'>{err ? err : ""}</div>
       <div className="corrtag">{comp ? comp : ""}</div>
+      <div className='corrtag'> {comp ? token : ""}</div>
     </div>
   );
 };
