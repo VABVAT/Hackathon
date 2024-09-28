@@ -11,6 +11,7 @@ const {statusModel} = require("./models/applications")
 const {PCCInformation} = require("./routes/PCCInformation");
 const {PCCStatus} = require("./routes/PCCStatus")
 const {language} = require("./routes/language")
+
 app.use(express.json());
 app.use(cors());
 // console.log("hey")
@@ -19,9 +20,6 @@ mongoose.connect(process.env.MONGO_CONNECTION)
 
 
 //! auth 1 mekes sure its their first time 
-
-
-
 
 
 app.get("/", (req, res)=> {

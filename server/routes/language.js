@@ -4,7 +4,7 @@ const router = express.Router();
 const cors = require("cors");
 const app = express();
 app.use(express.json());
-app.use(cors());
+router.use(cors());
 
 const translateText = async (text) => {
     try {
@@ -18,12 +18,12 @@ const translateText = async (text) => {
 
 router.post('/', async (req, res) => {
     const text = req.body.text;
-    console.log(text);
+    // console.log(text);
     try {
         const translatedText = await translateText(text);
         res.json({ translatedText });
     } catch (error) {
-        res.status(500).json({ error: 'Error translating text' });
+        res.status(401).json({ error: 'Error translating text' });
     }
 });
 

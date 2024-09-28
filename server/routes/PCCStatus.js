@@ -11,7 +11,7 @@ const {statusModel} = require("../models/applications")
 const router = express.Router();
 const {auth_2} = require("../middlewares/auth2");
 app.use(express.json());
-app.use(cors());
+router.use(cors());
 
 
 router.post("/", auth_2, async (req, res) => {

@@ -11,7 +11,7 @@ const {statusModel} = require("../models/applications")
 const router = express.Router();
 const {auth_1} = require("../middlewares/auth1");
 app.use(express.json());
-app.use(cors());
+router.use(cors());
 // console.log("hey")
 
 mongoose.connect(process.env.MONGO_CONNECTION)
