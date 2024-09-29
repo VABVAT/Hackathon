@@ -26,7 +26,7 @@ try{
          user_id : token
     }) 
     if(!user){
-        res.status(400).json({error : "User does not exists"})
+        res.status(401).json({error : "User does not exists"})
     }else{
        const result =  await statusModel.updateOne({
             user_id : token
