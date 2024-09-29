@@ -9,6 +9,7 @@ const {userModel} = require("../models/users")
 const {statusModel} = require("../models/applications")
 const router = express.Router();
 const {auth_1} = require("../middlewares/auth1");
+const {auth3} = require("../middlewares/auth3")
 app.use(express.json());
 app.use(cors());
 // console.log("hey")
@@ -16,10 +17,11 @@ app.use(cors());
 mongoose.connect(process.env.MONGO_CONNECTION)
 
 // ! add admin table and verification middleware here
-router.post("/", async (req, res) => {
+router.post("/", auth3 ,async (req, res) => {
 try{   
     const token = req.body.token;
     const status = req.body.status;
+    // const username = req.body.
     const user = await statusModel.findOne({
          user_id : token
     }) 
