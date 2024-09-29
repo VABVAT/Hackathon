@@ -41,7 +41,7 @@ try{
     
 }
 catch(e){
-    res.status(200).json({error : "Invalid entry"})
+    res.status(401).json({error : "Invalid entry"})
 }
 }
 )
