@@ -6,11 +6,11 @@ function Service() {
     return (
         <div>
             <header className="header">
-                <div className="logo-container">
+                <div >
                     <img src={goaLogo} alt="Goa Police Logo" className="logo" />
-                    <h3 className="header-title">GOA POLICE</h3>
+                    
                 </div>
-                <h1 className="citizen-services">CITIZEN SERVICES</h1>
+                {/* <h1 className="citizen-services">CITIZEN SERVICES</h1> */}
             </header>
             <div className="service-container">
                 <div className="service-tile">

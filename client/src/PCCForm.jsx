@@ -9,17 +9,17 @@ const PCCForm = () => {
   const [comp, setcomp] = useState(null);
   const [token, setToken] = useState(null);
   const [formData, setFormData] = useState({
-    name: '', // Full Name
-    address: '', // Address
-    dateOfAddress: '', // Date of Address
-    on_rent: '', // On Rent (Yes/No)
-    number_of_residents: '', // Number of Residents
-    occupation: '', // Occupation
-    mobileNo: '', // Mobile Number
-    adhaarNumber: '', // Aadhar Number
-    photo: null, // Photo Upload
-    involvedInCase: 'no', // Involvement in any Case
-    paymentReference: '', // Payment Reference
+    name: '', 
+    address: '', 
+    dateOfAddress: '',
+    on_rent: '', 
+    number_of_residents: '', 
+    occupation: '',
+    mobileNo: '', 
+    adhaarNumber: '', 
+    photo: null, 
+    involvedInCase: 'no', 
+    paymentReference: '', 
   });
 
   const handleDistrictChange = (e) => {
@@ -72,7 +72,7 @@ const PCCForm = () => {
         else{
           seterr(null)
           setToken(result.token);
-          setcomp("submitted successfully you can view your status using you below token")
+          setcomp("Submitted successfully you can view your status using token below")
         }
         
       };
@@ -86,9 +86,9 @@ const PCCForm = () => {
       </div>
       <h1 className="form-title">Police Clearance Certificate</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form  onSubmit={handleSubmit}>
         {/* Police station details */}
-        <div className="form-section" id="station-details">
+        <div  id="station-details">
           <h2 className="section-title">Police Station Details</h2>
           <label htmlFor="District">District:</label>
           <select id="District" name="district" className="select-input"  onChange={handleDistrictChange} required>
@@ -131,7 +131,7 @@ const PCCForm = () => {
           <label htmlFor="address">Address:</label>
           <textarea id="address" name="address" className="textarea-input" placeholder="Enter Your Address" value={formData.address} onChange={handleInputChange} required />
 
-          <label htmlFor="dateOfAddress">Date of Address:</label>
+          <label htmlFor="dateOfAddress">Start of residency tenure:</label>
           <input type="date" id="dateOfAddress" name="dateOfAddress" className="date-input" value={formData.dateOfAddress} onChange={handleInputChange} required />
 
           <label htmlFor="on_rent">On Rent:</label>

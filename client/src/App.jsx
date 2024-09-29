@@ -4,7 +4,10 @@ import Home from './Home'
 import PCCForm from './PCCForm'
 import PCCStatus from './PCCStatus'
 import Report from './Report'
-import Service from './Service'
+import Service from './Service' 
+import Cophelp from './Cophelp'
+import Admin from './Admin'
+import Faq from './Faq'
 // import './PCCForm.css'
 
 function App() {
@@ -19,6 +22,9 @@ function App() {
             <Route path="/PCCStatus" element={<PCCStatus/>}></Route>
             <Route path="/report" element={<Report />}></Route>
             <Route path="/service" element={<Service />}></Route>
+            <Route path='/cophelp' element={<Cophelp />}></Route>
+            <Route path='/admin' element={<Admin />}></Route>
+            <Route path="/Faq" element={<Faq />}></Route>
         </Routes>
       </Router>
     </>

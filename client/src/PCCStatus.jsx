@@ -7,7 +7,7 @@ function PCCStatus() {
     const [userStatus, setUserStatus] = useState("");
 
     const getStatus = async () => {
-        console.log(token);
+    try{
         const response = await fetch("https://hackathon-second.vercel.app/PCCStatus", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -21,6 +21,10 @@ function PCCStatus() {
         } else {
             setUserStatus(data.status);
         }
+    }catch(e){
+        console.log("err");
+        setErr("Invalid Token")
+    }
     }
 
     return (

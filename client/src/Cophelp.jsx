@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import styles from './speech.module.css'; // Importing CSS Module
 import goa_logo from '/goa_image.png'
-function Report() {
+function Cophelp() {
   const { transcript, resetTranscript } = useSpeechRecognition();
   const [translatedtext, settranslatedtext] = useState(null); 
   const [sol, setsol] = useState(null);
   const [pol, setpol] = useState([]);
   const [but, setBut] = useState("english"); // Default to English
+//   const 
 
   const startListening = () => {
     resetTranscript();
@@ -37,7 +38,6 @@ function Report() {
       });
       if (response.status === 200) {
         const data = await response.json();
-        console.log(data.translatedText)
         settranslatedtext(data.translatedText);
       }
     } catch (e) {
@@ -47,17 +47,17 @@ function Report() {
 
   const getSOl = async () => {
     try {
-      const response = await fetch("https://8d5d-2409-40c2-2040-a78e-a428-16b8-4790-9bdd.ngrok-free.app/classify", {
+      const response = await fetch("https://cda2-2409-40c2-2040-a78e-a428-16b8-4790-9bdd.ngrok-free.app/classify", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          case_description: translatedtext
+          question : translatedtext
         })
       });
 
       if (response.ok) {
         const data = await response.json();
-        const procedure = data.procedure;
+        const procedure = data.answer;
 
         let translatedProcedure = procedure;
         if (but === "hindi") {
@@ -71,12 +71,25 @@ function Report() {
           if (hindiResponse.ok) {
             const hindiData = await hindiResponse.json();
             translatedProcedure = hindiData.translatedText;
+          }else{
+            
           }
+          const hindiQues = await fetch("https://hackathon-second.vercel.app/enHi", {
+            method : "POST",
+            headers: {'Content-Type': 'application/json'},
+            body : JSON.stringify({
+                text : data.question
+            })
+          })
+          if (hindiQues.ok) {
+            const hindiQuestion = await hindiQues.json();
+            data.question = hindiQuestion.translatedText;
+        }
         }
 
         const arr = translatedProcedure.split('\\n');
-        setsol(data.case_type);
         setpol(arr);
+        setsol(data.question);
       }
     } catch (e) {
       console.error(e);
@@ -100,7 +113,7 @@ function Report() {
             <img src={goa_logo} alt="Goa Police Logo" />
           </div>
           <div className={styles.title}>
-            <h1>COPBOT</h1>
+            <h1>COPHELP</h1>
             <h3>AI Tool to assist visitors at police station</h3>
           </div>
         </div>
@@ -121,7 +134,7 @@ function Report() {
           <button className={styles.speech__button} onClick={getSOl}>Get solution for problem</button>
         </div>
       <div className={styles.otpt}>
-        <p>{translatedtext ? "YOUR TEXT HAS BEEN TRANSLATED YOU CAN GET THE SOLUTION" : "Start Listening -> Stop Listening -> Translate Text -> Get solution"}</p>
+        <p>{translatedtext ? "YOUR TEXT HAS BEEN TRANSLATED YOU CAN GET THE SOLUTION" : ""}</p>
       </div>
     <div className={styles.vvi}>
       <select className={styles.dropbox} value={but} onChange={(e) => setBut(e.target.value)}>
@@ -131,11 +144,11 @@ function Report() {
     </div>
       <div className={styles.solution}>
         <div className={styles.first}>
-          Case type -<br />
+          Question -<br />
           <p>{sol ? sol : ""}</p>
         </div>
         <div className={styles.first}>
-          Procedure - <br />
+          Answer - <br />
           <ul>
             {pol.map((line, index) => (<li key={index}>{line}</li>))}
           </ul>
@@ -143,10 +156,10 @@ function Report() {
       </div>
 
       <footer className={styles.footer}>
-        <p>Powered by COPBOT &copy; 2024</p>
+        <p>Powered by COPHELP &copy; 2024</p>
       </footer>
     </>
   );
 }
 
-export default Report;
+export default Cophelp;

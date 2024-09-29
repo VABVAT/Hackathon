@@ -1,99 +1,147 @@
-.pcc-container {
-    max-width: 600px;
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f7f2;
+  }
+  
+  label {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1vh;
+  }
+
+  /* Container */
+  .pcc-container {
+    max-width: 1500px; /* Increased width */
     margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
+    padding: 40px; /* More padding for spaciousness */
+    background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid black;
+  }
+  
+  /* Logo */
 
-.errortag{
+  
+  .logo {
+    background-position: center;
+    /* transform: scale(1.5); */
+     /* Increased height for better visibility */
+  }
+  
+  /* Form Title */
+  .form-title {
     text-align: center;
-    font-weight: bolder;
-    color: red;
-    font-family: Arial, Helvetica, sans-serif;
-}
-.corrtag{
-    text-align: center;
-    font-weight: bolder;
-    color: green;
-    font-family: Arial, Helvetica, sans-serif;
-}
-.logo-container {
-    text-align: center;
+    font-size: 28px;
+    color: #2e7d32;
     margin-bottom: 20px;
-}
-
-.logo {
-    width: 100px; /* Adjust as necessary */
-}
-
-.form-title {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.form-section {
-    margin-bottom: 20px;
-}
-
-.section-title {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.label {
-    display: block;
-    margin-bottom: 5px;
     font-weight: bold;
-}
+    text-transform: uppercase;
+  }
 
-.text-input,
-.date-input,
-.textarea-input,
-.select-input,
-.file-input {
+
+  
+  /* Section Titles */
+  .section-title {
+    font-size: 22px;
+    color: #2e7d32;
+    margin-bottom: 15px;
+    font-weight: bold;
+    border-bottom: 2px solid #4caf50;
+    padding-bottom: 5px;
+  }
+  
+  /* Form Inputs */
+  .text-input,
+  .textarea-input,
+  .select-input,
+  .date-input,
+  .number-input,
+  .file-input,
+  #involvedInCase {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-.textarea-input {
-    height: 100px; /* Adjust as necessary */
-}
-
-.submit-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
     font-size: 16px;
-}
-
-.submit-button:hover {
-    background-color: #45a049;
-}
-
-.age-display {
-    margin-top: 5px;
-    font-weight: bold;
-}
-
-.calculate-age-button {
-    margin-top: 5px;
-    padding: 5px 10px;
+    box-sizing: border-box;
+  }
+  
+  .text-input:focus,
+  .textarea-input:focus,
+  .select-input:focus,
+  .date-input:focus,
+  .number-input:focus,
+  .file-input:focus,
+  #involvedInCase:focus {
+    outline: none;
+    border: 2px solid #2e7d32;
+  }
+  
+  /* Textarea Input */
+  .textarea-input {
+    height: 80px;
+    resize: none;
+  }
+  
+  /* Submit Button */
+  .submit-button {
+    width: 100%;
+    background-color: #2e7d32;
+    color: white;
+    padding: 12px 0;
     border: none;
     border-radius: 5px;
-    background-color: #007BFF;
-    color: white;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
-}
-
-.calculate-age-button:hover {
-    background-color: #0056b3;
-}
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #1b5e20;
+  }
+  
+  /* Error and Success Messages */
+  .errortag {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .corrtag {
+    color: #2e7d32;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Dropdown Options Styling */
+  .dropdown-options {
+    margin-bottom: 15px;
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .pcc-container {
+      padding: 20px;
+    }
+  
+    .form-title {
+      font-size: 24px;
+    }
+  
+    .section-title {
+      font-size: 18px;
+    }
+  
+    .submit-button {
+      font-size: 16px;
+    }
+  }
+  

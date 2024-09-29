@@ -9,7 +9,9 @@ import police from '/goa_image.png'
 
 function App() {
   const navigate = useNavigate();
-
+  const scrollToBottom = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  };
   const goToForm = () => {
     navigate('/PCCForm');
   };
@@ -19,14 +21,19 @@ function App() {
   };
 
   const adminLogin = () => {
-    navigate('/Admin');
+    navigate('/admin');
   };
-
   const report = () => {
     navigate('/report');
   };
   const service = () => {
     navigate('/service')
+  }
+  const cophelp = () => {
+    navigate('/cophelp')
+  }
+  const faq = () => {
+    navigate('/Faq')
   }
 
   useEffect(() => {
@@ -65,34 +72,35 @@ function App() {
           </div>
           <div className="menu">
             <button id="homeButton" >Home</button>
-            <button id="aboutButton">About Us</button>
+            <button id="aboutButton" onClick={scrollToBottom}>About us</button>
             <button id="featuresButton" onClick={service}>Services</button>
-            <button id="contactUs">Contact Us</button>
+            <button id="contactUs" onClick={faq}>FAQ'S</button>
           </div>
         </div>
       </header>
 
       <div className="below">
         <div className="left">
-          <h2>Welcome to AI Police ChatBot</h2>
+        <div className="headingContainer">
+  <h1 className="heading">Welcome to our online portal</h1>
+        </div>
           <h3 className='random_text'>
-            Based on their case descriptions, the AI assistant chatbot is
-            intended to aid guests at police stations by advising them on the
-            kind of case they should register. It categorizes the case type
-            using advanced text analysis and then gives detailed guidance on
-            what has to be performed next. Legal proceedings are handled more
-            easily and effectively as a result of this process streamlining for
-            both officers and visitors.
+
           </h3>
           <div className="buttonContainer">
-            <button className='b1' onClick={goToForm}>Start New Application</button>
+            <button className='b1' onClick={goToForm}>Start a New PCC Application</button>
             <button className='b1' onClick={goToStatus}>Review your status</button>
-            <button className='b1' onClick={adminLogin}>Admin login</button>
-            <button className='b1' onClick={report}>Report a crime (with AI chat bot)</button>
-            <button className='b1' onClick={report}>FAQ with our Ai</button>
+            <button className='b1' onClick={adminLogin}>Admin Login</button>
+            <button className='b1' onClick={report}>COPBOT </button>
+            <button className='b1' onClick={cophelp}>COPHELP</button>
+          </div>
+          <div className='cophelpContainer'>
+            <p><h2>COPBOT</h2> Confused about paperwork or processes? Let our AI tool assist you, offering precise answers to make your police station visit smoother  </p>
+            <p><h2>COPHELP</h2>Need help with common queries? Our AI FAQ tool provides clear, accurate answers to prepare you for your police station visit.</p>
+            <p><h2>LANGUAGE SUPPORT</h2> We offer multilingual support to cater to diverse needs</p>
           </div>
         </div>
-
+        
         <div className="right">
           <div className="right1">
             <div className="slider-container">
@@ -116,7 +124,7 @@ function App() {
         </div>
       </div>
 
-      <footer>
+      <footer className='foot'>
         <div className="footer-container">
           <div className="footer-about">
             <h3>About Goa Police</h3>

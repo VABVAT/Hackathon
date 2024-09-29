@@ -79,7 +79,7 @@
   .speech {
     margin: 9% auto;
     width: 60vw;
-    height: 40vh;
+    height: 10vh;
     border: 1px solid #000;
     overflow-y: auto;
     background-color: #f9f9f9;
@@ -89,6 +89,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.2);
+    /* margin-bottom: 20px; */
   }
   
   .speech__transcript {
@@ -101,12 +105,21 @@
   }
   
   .otpt {
-    display: block;
-    background-color: rgb(219, 222, 215);
-    border: 2px solid black;
-    height: 10vh;
+    /* margin-top: 10px; */
+    /* display: block;
+     */
+     margin-top: 5px;
+    /* background-color: rgb(219, 222, 215); */
+    /* border: 2px solid black; */
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+    height: 6vh;
     width: 60%;
     margin: auto;
+    /* justify-content: ;di */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Times New Roman', Times, serif;
   }
   
   .solution {
@@ -119,23 +132,29 @@
     width: 30%;
     text-align: left;
     padding: 1vw;
-    height: 100vh;
+    height: 60vh;
     background-color: beige;
-    border-radius: 1vh;
+    /* border-radius: 1vh; */
     font-weight: bolder;
+    border-radius: 3vh;
+    border: 1px solid black;
+    overflow: scroll;
   }
   
   .speech__button {
-    margin: 10px 5px;
-    padding: 10px 15px;
-    font-size: 15px;
+    /* margin: 10px 5px; */
+    margin-bottom: 10px;
+    padding: 5px 5px;
+    font-size: 14px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
-    width: 19vw;
+    width: 10vw;
+    margin: 5px;
+    font-family: cursive;
   }
   
   .speech__button:hover {
@@ -167,5 +186,7 @@
   
   .buttonsContainer{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    margin-bottom: 10px;
+    /* justify-content: space-evenly; */
   }

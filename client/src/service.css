@@ -1,8 +1,7 @@
 
 
 .header {
-    top: 15px;
-    background-color: #004d40; /* Goa police blue */
+    top: 30px;/* Goa police blue */
     padding: 20px;
     display: flex;
     align-items: center;
