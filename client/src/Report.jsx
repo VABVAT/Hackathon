@@ -48,7 +48,7 @@ function Report() {
   const getSOl = async () => {
     try {
 
-      const response = await fetch("/api/proxy", {
+      const response = await fetch("/api/proxy.js", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
