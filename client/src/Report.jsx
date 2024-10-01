@@ -47,7 +47,7 @@ function Report() {
 
   const getSOl = async () => {
     try {
-      const response = await fetch("http://ec2-13-60-49-9.eu-north-1.compute.amazonaws.com:8080/classify", {
+      const response = await fetch("/api/proxy", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
