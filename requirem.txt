@@ -1,6 +1,0 @@
-pandas
-torch
-scikit-learn
-transformers
-Flask
-flask_cors
