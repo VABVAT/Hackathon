@@ -47,7 +47,7 @@ function Report() {
 
   const getSOl = async () => {
     try {
-      const response = await fetch("https://8d5d-2409-40c2-2040-a78e-a428-16b8-4790-9bdd.ngrok-free.app/classify", {
+      const response = await fetch("http://ec2-13-60-49-9.eu-north-1.compute.amazonaws.com:8080/classify", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
