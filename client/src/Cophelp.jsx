@@ -47,7 +47,7 @@ function Cophelp() {
 
   const getSOl = async () => {
     try {
-      const response = await fetch("https://cda2-2409-40c2-2040-a78e-a428-16b8-4790-9bdd.ngrok-free.app/classify", {
+      const response = await fetch("https://316e-2409-40c2-2047-f85c-cdbb-7cb3-42ca-2b71.ngrok-free.app/classify", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
